@@ -11,8 +11,8 @@ class SinglyLinkedList {
         this.tail = null;
         this.length = 0;
     }
-    push(val){
-        let newNode = new Node(val, null);
+    push(value){
+        let newNode = new Node(value, null);
         if(!this.head){
             this.head = newNode;
             this.tail = newNode;
@@ -50,8 +50,8 @@ class SinglyLinkedList {
         }
         return current;
     }
-    unshift(val){
-        let newNode = new Node(val);
+    unshift(value){
+        let newNode = new Node(value);
         if(!this.head){
             this.head = newNode;
             this.tail = this.head;
@@ -114,13 +114,77 @@ class SinglyLinkedList {
         }
         return this;
       }
+      removeNthFromEnd(A, B){        
+        var count =0;
+        var head = A;
+        while(head){
+            count++;
+            head = head.next;
+        }
+        var removeIndex = count - B;
+        var currentIndex = 0;
+        var  currentNode = A, prev = currentNode;
+        if(!currentNode) return null;
+        else if (removeIndex <= 1) return A.next;
+        else {
+            while(currentNode){
+                if(currentIndex === removeIndex){
+                        prev.next = currentNode.next;
+                        return A;
+                }
+                currentIndex++;
+                prev = currentNode;
+                currentNode = currentNode.next;
+            }
+        }
+    }
+    mergeTwoLists(l1, l2) {
+        var list = new ListNode(null);
+        var currentNode = list;
+        while(l1 && l2){
+           if(l1.value > l2.value){
+                currentNode.next = new ListNode(l2.value);
+                l2 = l2.next;
+                currentNode = currentNode.next;
+           }
+            else if(l1.value < l2.value){
+               currentNode.next = new ListNode(l1.value);
+               l1 = l1.next;
+               currentNode = currentNode.next;
+           }
+            else if(l1.value == l2.value){
+                currentNode.next = new ListNode(l1.value);
+                currentNode = currentNode.next;
+                currentNode.next = new ListNode(l2.value);
+                currentNode = currentNode.next;
+                l1 = l1.next;
+                l2 = l2.next;
+           }
+        }
+        
+        while(l1){
+            currentNode.next = new ListNode(l1.value);
+            l1 = l1.next;
+            currentNode = currentNode.next;
+        }
+        while(l2){
+            currentNode.next = new ListNode(l2.value);
+            l2 = l2.next;
+            currentNode = currentNode.next;
+        }
+        return list.next;
+    };    
 }
 
-var list = new SingleLinkedList();
-list.push('Hello');
-list.push('You');
-list.push('Me');
-list.push('sdf');
-list.push('sadf');
+var list1 = new SinglyLinkedList();
+list1.push(1);
+list1.push(2);
+list1.push(4);
+var list2 = new SinglyLinkedList();
+list2.push(1);
+list2.push(3);
+list2.push(4);
+var list = new SinglyLinkedList();
 
-console.log(list);
+
+console.log(list.mergeTwoLists(list1.head, list2.head));
