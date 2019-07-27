@@ -22,7 +22,6 @@ function findLongestSubstring(str){
 
 console.log(findLongestSubstring('longestsubstring'));
 
-
 // function findLongestSubstring(str) {
 //     let longest = 0;
 //     let obj = {};
