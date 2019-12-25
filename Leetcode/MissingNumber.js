@@ -12,3 +12,5 @@ for(var j=0; j<nums.length; j++){
     if(!obj[j]) return j;
 }
 };
+
+

@@ -1,5 +1,5 @@
-class Node{
-    constructor(value){
+class Node {
+    constructor(value) {
         this.value = value;
         this.left = null;
         this.right = null;
@@ -7,26 +7,26 @@ class Node{
 }
 
 class BinarySearchTree {
-    constructor(){
+    constructor() {
         this.root = null;
     }
-    insert(value){
+    insert(value) {
         let newNode = new Node(value);
-        if(!this.root){
+        if (!this.root) {
             this.root = newNode;
             return this;
         }
         let currentNode = this.root;
-        while(true){
-            if(value === currentNode.value) return undefined;
-            if(value < currentNode.value){
-                if(!currentNode.left){
+        while (true) {
+            if (value === currentNode.value) return undefined;
+            if (value < currentNode.value) {
+                if (!currentNode.left) {
                     currentNode.left = newNode;
                     return this;
                 }
                 currentNode = currentNode.left;
             } else {
-                if(!currentNode.right){
+                if (!currentNode.right) {
                     currentNode.right = newNode;
                     return this;
                 }
@@ -34,28 +34,28 @@ class BinarySearchTree {
             }
         }
     }
-    find(value){
-        if(!this.root) return false;
+    find(value) {
+        if (!this.root) return false;
         let currentNode = this.root, found = false;
-        while(currentNode && !found){
-            if(value < currentNode.value){
+        while (currentNode && !found) {
+            if (value < currentNode.value) {
                 currentNode = currentNode.left;
-            } else if(value > currentNode.value){
+            } else if (value > currentNode.value) {
                 currentNode = currentNode.right;
             } else {
                 found = true;
             }
         }
-        if(!found) return false;
+        if (!found) return false;
         return currentNode;
     }
-    contains(value){
-        if(!this.root) return false;
+    contains(value) {
+        if (!this.root) return false;
         let currentNode = this.root;
-        while(currentNode){
-            if(value < currentNode.value){
+        while (currentNode) {
+            if (value < currentNode.value) {
                 currentNode = currentNode.left;
-            } else if(value > currentNode.value){
+            } else if (value > currentNode.value) {
                 currentNode = currentNode.right;
             } else {
                 return true;
@@ -63,49 +63,49 @@ class BinarySearchTree {
         }
         return false;
     }
-    BFS(){
+    BFS() {
         let node = this.root,
             data = [],
             queue = [];
         queue.push(node);
-        while(queue.length){
+        while (queue.length) {
             node = queue.shift();
             data.push(node.value);
-            if(node.left) queue.push(node.left);
-            if(node.right) queue.push(node.right);
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
         }
         return data;
     }
-    DFSPreOrder(){
-         let data = [];
-        function traverse(node){
+    DFSPreOrder() {
+        let data = [];
+        function traverse(node) {
             data.push(node.value);
-            if(node.left) traverse(node.left);
-            if(node.right) traverse(node.right);
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
         }
         traverse(this.root);
         return data;
     }
-    DFSPostOrder(){
+    DFSPostOrder() {
         let data = [];
-       function traverse(node){
-           if(node.left) traverse(node.left);
-           if(node.right) traverse(node.right);
-           data.push(node.value);
-       }
-       traverse(this.root);
-       return data;
-   }
-   DFSInOrder(){
-    let data = [];
-   function traverse(node){
-       if(node.left) traverse(node.left);
-       data.push(node.value);
-       if(node.right) traverse(node.right);
-   }
-   traverse(this.root);
-   return data;
-}
+        function traverse(node) {
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
+            data.push(node.value);
+        }
+        traverse(this.root);
+        return data;
+    }
+    DFSInOrder() {
+        let data = [];
+        function traverse(node) {
+            if (node.left) traverse(node.left);
+            data.push(node.value);
+            if (node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return data;
+    }
 
 }
 
